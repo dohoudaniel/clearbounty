@@ -4,5 +4,7 @@
 
 ;; Fetch external judgment
 (define-public (fetch-judgment (bounty-id uint))
-  (try! (contract-call? oracle-address get-judgment bounty-id))
-  (ok true))
+  (begin
+    ;; This would call an external oracle contract
+    ;; For now, return a placeholder response
+    (ok true)))

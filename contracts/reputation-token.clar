@@ -4,6 +4,7 @@
 
 ;; Mint new reputation tokens
 (define-public (mint (recipient principal) (amount uint))
-  (asserts (is-eq tx-sender contract-owner) (err u1))
-  (ft-mint? rep-token amount recipient)
-  (ok true))
+  (begin
+    (asserts! (is-eq tx-sender contract-owner) (err u1))
+    (try! (ft-mint? rep-token amount recipient))
+    (ok true)))
