@@ -1,30 +1,17 @@
+;; Handles bounty disputes
+(define-constant err-not-found u1)
+(define-map Dispute
+  bounty-id uint
+  (reason (string-utf8 200), status (enum (open resolved)))
 
-;; title: dispute-resolver
-;; version:
-;; summary:
-;; description:
+;; Open dispute
+(define-public (open-dispute (bounty-id uint) (reason (string-utf8 200)))
+  (map-set Dispute bounty-id { reason: reason, status: open })
+  (ok true))
 
-;; traits
-;;
-
-;; token definitions
-;;
-
-;; constants
-;;
-
-;; data vars
-;;
-
-;; data maps
-;;
-
-;; public functions
-;;
-
-;; read only functions
-;;
-
-;; private functions
-;;
-
+;; Resolve dispute via oracle
+(define-public (resolve-dispute (bounty-id uint) (resolution bool))
+  (let ((dispute (unwrap! (map-get? Dispute bounty-id) (err err-not-found))))
+  (asserts (is-eq (get status dispute) open) (err u2))
+  (map-set Dispute bounty-id (merge dispute { status: resolved }))
+  (ok resolution))
