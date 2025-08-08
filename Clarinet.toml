@@ -1,21 +1,49 @@
 [project]
-name = "clearbounty"
-description = ""
+name = 'clearbounty'
+description = ''
 authors = []
 telemetry = true
-cache_dir = "./.cache"
+cache_dir = './.cache'
+requirements = []
+[contracts.application]
+path = 'contracts/application.clar'
+clarity_version = 3
+epoch = 3.1
 
-# [contracts.counter]
-# path = "contracts/counter.clar"
+[contracts.bounty-manager]
+path = 'contracts/bounty-manager.clar'
+clarity_version = 3
+epoch = 3.1
 
+[contracts.dispute-resolver]
+path = 'contracts/dispute-resolver.clar'
+clarity_version = 3
+epoch = 3.1
+
+[contracts.escrow]
+path = 'contracts/escrow.clar'
+clarity_version = 3
+epoch = 3.1
+
+[contracts.governance-dao]
+path = 'contracts/governance-dao.clar'
+clarity_version = 3
+epoch = 3.1
+
+[contracts.oracle-adapter]
+path = 'contracts/oracle-adapter.clar'
+clarity_version = 3
+epoch = 3.1
+
+[contracts.reputation-token]
+path = 'contracts/reputation-token.clar'
+clarity_version = 3
+epoch = 3.1
 [repl.analysis]
-passes = ["check_checker"]
-check_checker = { trusted_sender = false, trusted_caller = false, callee_filter = false }
+passes = ['check_checker']
 
-# Check-checker settings:
-# trusted_sender: if true, inputs are trusted after tx_sender has been checked.
-# trusted_caller: if true, inputs are trusted after contract-caller has been checked.
-# callee_filter: if true, untrusted data may be passed into a private function without a
-# warning, if it gets checked inside. This check will also propagate up to the
-# caller.
-# More informations: https://www.hiro.so/blog/new-safety-checks-in-clarinet
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
